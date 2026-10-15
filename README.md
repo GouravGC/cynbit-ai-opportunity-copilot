@@ -1,166 +1,191 @@
 # Cynbit AI Opportunity Blueprint Copilot
 
-An AI-powered proof of concept that transforms business problems into structured AI/ML opportunity blueprints using publicly available company information, TF-IDF-based retrieval, and an LLM.
-
-**Developed for:** Cynbit AI/ML Engineer Intern Technical Assessment
+An AI-powered proof of concept developed for the **Cynbit AI/ML Engineer Intern Technical Assessment**. The application explores AI/ML business opportunities and demonstrates AI-assisted customer enquiry classification, triage, and solution planning.
 
 ## Project Links
 
 - **Live Demo:** https://cynbit-ai-opportunity-copilot.streamlit.app/
 - **GitHub Repository:** https://github.com/GouravGC/cynbit-ai-opportunity-copilot
-- **AI Opportunity Report:** [Read the Industry Analysis and Recommendations](AI_OPPORTUNITY_REPORT.md)
-- **Technical Approach Report:** [Read the Architecture and Implementation Plan](TECHNICAL_APPROACH.md)
+- **AI Opportunity Report:** [AI_OPPORTUNITY_REPORT.md](AI_OPPORTUNITY_REPORT.md)
+- **Technical Approach Report:** [TECHNICAL_APPROACH.md](TECHNICAL_APPROACH.md)
 
-## 1. Project Overview
+## Overview
 
-The Cynbit AI Opportunity Blueprint Copilot helps users explore how AI/ML could address business challenges and generate a structured implementation blueprint.
+Businesses receive enquiries that require manual interpretation, qualification, prioritisation, and coordination between teams. AI can help structure this information and recommend appropriate next steps, reducing repetitive work while keeping people responsible for decisions.
 
-The prototype retrieves relevant information from a collection of public Cynbit website sources and supplies that context to an LLM to generate a report with proposed solutions, architecture, risks, evaluation metrics, and implementation phases.
+This project demonstrates two complementary workflows:
 
-## 2. Key Features
+1. **Opportunity Blueprint:** Converts a business inquiry into a structured AI solution proposal using retrieved public website evidence.
+2. **Enquiry Classification & Routing:** Analyses a customer enquiry, identifies its intent, recommends a service category and destination team, and highlights missing information.
 
-- Business problem input through a Streamlit interface
-- Retrieval of relevant information from public company sources
-- TF-IDF-based text retrieval using cosine similarity
-- LLM-powered opportunity analysis and blueprint generation
-- Source URL references and explicit assumptions
-- Proposed architecture, implementation phases, risks, and evaluation metrics
-- Markdown report generation and download
+The project recommends AI-powered customer enquiry classification and lead routing as a potential pilot opportunity. The recommendation requires validation with business stakeholders and representative data.
 
-## 3. Technical Stack
+## Features
 
-| Component | Technology |
-|---|---|
-| Programming language | Python |
-| User interface | Streamlit |
-| Language model | Google Gemini 2.5 Flash via OpenRouter |
-| Retrieval | Scikit-learn TF-IDF and cosine similarity |
-| Testing | Pytest |
-| Version control | Git and GitHub |
-| Deployment | Streamlit Community Cloud |
+### 1. Opportunity Blueprint
 
-## 4. Architecture
+The blueprint workflow:
 
-1. The user submits a business problem.
-2. Public company source records are loaded.
-3. Text is split into overlapping chunks.
-4. TF-IDF retrieval ranks relevant chunks against the query.
-5. Retrieved context and instructions are passed to the LLM.
-6. The model generates a structured opportunity blueprint.
-7. The interface displays the report and provides a Markdown download.
+- Accepts a business inquiry describing a problem, goals, requirements, and constraints.
+- Retrieves relevant public-source evidence using TF-IDF similarity.
+- Uses an LLM to generate a structured AI solution proposal.
+- Identifies potentially relevant Cynbit services and supporting source URLs.
+- Separates publicly advertised services from proposed solution architecture.
+- Outlines implementation phases, risks, safeguards, evaluation metrics, and unanswered questions.
+- Allows the generated blueprint to be downloaded as a Markdown file.
 
-**Note:** The current retrieval implementation is lexical TF-IDF retrieval, not embedding-based semantic search.
+### 2. AI-Powered Customer Enquiry Classification
 
-## 5. Public Information Sources
+The classification workflow:
 
-- [Cynbit Services](https://www.cynbit.in/services)
-- [Cynbit Contact](https://www.cynbit.in/contact)
-- [Cynbit Careers](https://www.cynbit.in/careers)
+- Accepts a customer enquiry or a sample query.
+- Identifies the enquiry's intent and generates a factual summary.
+- Assigns a service category.
+- Estimates qualitative urgency and confidence.
+- Recommends a destination team and next action.
+- Identifies missing information that may require clarification.
+- Displays the results and supports downloading the structured classification.
 
-These sources provide public context for the prototype. They do not establish access to Cynbit's internal data or validate the business impact of proposed opportunities.
+**Important:** Both workflows are separate actions in the application. Users can copy an inquiry from one tab and paste it into the other when testing the two workflows together.
 
-## 6. Assessment Deliverables
+## Technology Stack
 
-### Deliverable 1: AI Opportunity Report
+- **Language:** Python
+- **Application UI:** Streamlit
+- **LLM integration:** OpenAI-compatible client through OpenRouter
+- **Language model:** Google Gemini 2.5 Flash, accessed through OpenRouter
+- **Retrieval:** Scikit-learn TF-IDF vectorization and cosine similarity
+- **Configuration:** Environment variables and `python-dotenv`
+- **Testing:** Pytest
 
-[Open AI_OPPORTUNITY_REPORT.md](AI_OPPORTUNITY_REPORT.md)
+## Architecture
 
-Evaluates potential AI/ML opportunities, prioritizes candidate use cases, recommends an initial pilot, and discusses implementation considerations, risks, and evaluation metrics.
+### Opportunity Blueprint Workflow
 
-### Deliverable 2: AI/ML Proof of Concept
+1. The user submits a business inquiry.
+2. The retriever loads the collected public-source dataset.
+3. Text is divided into overlapping chunks and ranked using TF-IDF similarity.
+4. Relevant evidence and source URLs are added to the LLM prompt.
+5. The LLM generates a structured opportunity blueprint.
+6. The user reviews and downloads the result.
 
-[Launch the Live Demo](https://cynbit-ai-opportunity-copilot.streamlit.app/)
+### Enquiry Classification Workflow
 
-[Explore the Source Code](https://github.com/GouravGC/cynbit-ai-opportunity-copilot)
+1. The user enters or loads a customer enquiry.
+2. The LLM analyses the enquiry and returns structured JSON.
+3. The application validates the output and applies safe defaults to unsupported category, urgency, or confidence values.
+4. The application displays the classification, suggested route, recommended next action, and missing information.
+5. The user reviews the recommendations before acting on them.
 
-A working prototype demonstrating retrieval-augmented report generation using public company information and a hosted LLM.
-
-### Deliverable 3: Technical Approach Report
-
-[Open TECHNICAL_APPROACH.md](TECHNICAL_APPROACH.md)
-
-Documents the system architecture, model choices, retrieval pipeline, prompt engineering, testing approach, security considerations, limitations, and proposed execution plan.
-
-## 7. Setup and Local Execution
+## Getting Started
 
 ### Prerequisites
 
 - Python 3.11 recommended
-- An OpenRouter API key
+- Git
+- An OpenRouter API key with access to the configured model
 
-### Installation
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/GouravGC/cynbit-ai-opportunity-copilot.git
 cd cynbit-ai-opportunity-copilot
-
-python -m venv .venv
 ```
 
-Activate the environment.
+### 2. Create and activate a Conda environment
 
-**Windows:**
 ```bash
-.venv\Scripts\activate
+conda create -n cynbit_proj python=3.11 -y
+conda activate cynbit_proj
 ```
 
-**macOS/Linux:**
-```bash
-source .venv/bin/activate
-```
-
-Install dependencies:
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Configure your API key using an environment variable:
+### 4. Configure the API key
 
-**Windows PowerShell:**
-```powershell
-$env:OPENROUTER_API_KEY="your-api-key"
+Create a `.env` file in the project root:
+
+```env
+OPENROUTER_API_KEY=your_openrouter_api_key
 ```
 
-**macOS/Linux:**
-```bash
-export OPENROUTER_API_KEY="your-api-key"
-```
+Replace the placeholder with your own API key. Never commit `.env` or expose API keys in screenshots, logs, or public files.
 
-Run the Streamlit application using the entry point configured for this repository. For the current UI module, that is:
+### 5. Run the application
 
 ```bash
 streamlit run app/ui.py
 ```
 
-Never commit API keys or secret files to GitHub.
+Open the local URL printed by Streamlit in your browser.
 
-## 8. Testing
+## Testing
 
-Run the automated test suite:
+Run the available automated tests:
 
 ```bash
 python -m pytest -v
 ```
 
-The tests cover selected source-loading and workflow behavior. They do not independently guarantee factual accuracy of live LLM responses or production readiness.
+Manual testing should include:
 
-## 9. Limitations and Future Improvements
+- Generating a blueprint from a detailed business inquiry.
+- Checking whether relevant source URLs appear in the blueprint.
+- Classifying a short customer enquiry.
+- Testing an ambiguous or incomplete enquiry.
+- Checking the displayed missing-information recommendations.
+- Verifying that the application handles invalid inputs and API errors appropriately.
 
-- Expand and periodically refresh the public-source collection.
-- Evaluate retrieval relevance on a labeled query set.
-- Add stronger validation of generated claims and citations.
-- Improve error handling, logging, and API usage monitoring.
-- Evaluate output quality using representative test cases.
-- Consider embedding-based retrieval and persistent indexing if evaluation justifies them.
-- Conduct security, privacy, and stakeholder reviews before production deployment.
+Example outputs should be treated as functional demonstrations, not evidence of measured classification accuracy.
 
-## 10. Responsible AI
+## Assessment Deliverables
 
-The prototype is intended for exploratory analysis. Generated recommendations should be reviewed by a human, and source references should be checked before business decisions are made. The system has not been demonstrated to deliver verified cost savings or other measured business outcomes.
+### 1. AI Opportunity Report
 
-Reference: [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+`AI_OPPORTUNITY_REPORT.md` analyses potential business applications of AI/ML and presents a proposed opportunity for further investigation.
+
+### 2. AI/ML Proof of Concept
+
+The Streamlit application demonstrates evidence-informed opportunity blueprint generation and AI-assisted customer enquiry classification and routing recommendations.
+
+### 3. Technical Approach Report
+
+`TECHNICAL_APPROACH.md` describes the architecture, model integration, retrieval approach, implementation plan, safeguards, and proposed evaluation methodology.
+
+## Responsible AI and Limitations
+
+- The application is a proof of concept, not a production customer-management system.
+- Classification, urgency, confidence, and routing recommendations are generated by an LLM and may be incorrect.
+- Confidence is qualitative and is not a calibrated probability.
+- The application does not contact customers, update a CRM, or execute actual routing actions.
+- Public-source retrieval can return incomplete or irrelevant evidence.
+- Source URLs should be checked to confirm that they support the associated claims.
+- No classification accuracy or business performance improvement should be claimed without a documented evaluation.
+- Human review is required before acting on generated recommendations.
+- Production deployment would require representative labelled data, evaluation, privacy controls, monitoring, and stakeholder approval.
+
+## Future Improvements
+
+Potential next steps, subject to validation and project requirements:
+
+- Evaluate classification and routing recommendations against a labelled enquiry dataset.
+- Measure category precision and recall, routing agreement, human correction rate, latency, and inference cost.
+- Improve missing-information detection and structured-output validation.
+- Explore approved CRM integration and controlled routing only after the prototype has been evaluated.
+- Add monitoring and feedback mechanisms for continuous improvement.
+
+## Author
+
+**Gourav Chhatwani**
+
+GitHub: https://github.com/GouravGC
+
+Portfolio: https://gcsportfolio.streamlit.app/
 
 ---
 
-**Project status:** Technical assessment proof of concept. Production deployment and business impact require further validation.
+*Developed as an AI/ML internship assessment proof of concept. Business opportunities and proposed architectures are recommendations for further evaluation, not claims of existing production capabilities.*
