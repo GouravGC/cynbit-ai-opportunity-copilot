@@ -1,39 +1,70 @@
 # Cynbit AI Opportunity Blueprint Copilot
 
-**An AI-powered proof of concept for transforming business inquiries into evidence-grounded AI solution blueprints.**
+**An AI-powered prototype that transforms business inquiries into structured, evidence-grounded AI solution blueprints.**
 
-[![Python](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B)](https://streamlit.io/)
-[![Tests](https://img.shields.io/badge/Tests-6%20Passing-brightgreen)](https://docs.pytest.org/)
+<p align="center">
+  <a href="https://cynbit-ai-opportunity-copilot.streamlit.app/">
+    <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg" alt="Open Live App">
+  </a>
+</p>
 
-**Repository:** [GouravGC/cynbit-ai-opportunity-copilot](https://github.com/GouravGC/cynbit-ai-opportunity-copilot)
+<p align="center">
+  <a href="https://cynbit-ai-opportunity-copilot.streamlit.app/"><strong>🚀 Launch Live App</strong></a>
+  &nbsp; | &nbsp;
+  <a href="https://github.com/GouravGC/cynbit-ai-opportunity-copilot"><strong>💻 View Source Code</strong></a>
+</p>
+
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B)
+![Retrieval](https://img.shields.io/badge/Retrieval-TF--IDF-orange)
+![Testing](https://img.shields.io/badge/Tests-6%20Passing-brightgreen)
 
 ## Overview
 
-Businesses need practical ways to translate operational challenges into actionable AI opportunities. This project demonstrates an AI-assisted workflow that takes a client inquiry, retrieves relevant information from Cynbit's publicly available website, and generates a structured solution blueprint for human review.
+Organizations need practical ways to translate operational challenges into actionable AI opportunities. This project demonstrates an AI-assisted workflow that analyzes a client inquiry, retrieves relevant information from Cynbit's publicly available website, and generates a structured solution blueprint for human review.
 
-The prototype combines lightweight information retrieval, prompt engineering, and a large language model to support early-stage opportunity analysis and solution design.
+The application combines lightweight information retrieval, prompt engineering, and a large language model to support early-stage business analysis and AI solution design.
+
+## Live Demo
+
+**Try it here:** [Cynbit AI Opportunity Blueprint Copilot](https://cynbit-ai-opportunity-copilot.streamlit.app/)
+
+Enter a business problem in natural language and generate a structured blueprint that includes requirements, proposed architecture, risks, implementation phases, and evaluation metrics. The generated blueprint can be downloaded as a Markdown report.
 
 ## Key Features
 
-- **Business inquiry analysis:** Converts natural-language problem descriptions into structured requirements.
-- **Retrieval-augmented generation:** Retrieves relevant passages from collected public website content and supplies them as context to the language model.
-- **Relevance-based search:** Uses TF-IDF vectorization, n-grams, and cosine similarity to rank relevant text chunks.
-- **Evidence-aware recommendations:** Instructs the model to include source URLs for claims about publicly advertised services.
-- **Structured solution blueprints:** Organizes outputs into business objectives, requirements, architecture, missing information, risks, implementation phases, and evaluation metrics.
-- **Human-in-the-loop safeguards:** Highlights uncertainty, assumptions, and cases requiring human review.
-- **Interactive application:** Provides a Streamlit interface for submitting inquiries and reviewing generated blueprints.
-- **Report export:** Downloads generated blueprints as Markdown files.
-- **Automated tests:** Includes tests for source availability and basic blueprint workflow behavior.
+- **Business inquiry analysis:** Converts natural-language business problems into structured requirements.
+- **Retrieval-augmented generation (RAG):** Retrieves relevant passages from collected public website content and supplies them as context to the language model.
+- **TF-IDF-based retrieval:** Uses word and bigram features with cosine similarity to rank relevant text chunks.
+- **Source-aware recommendations:** Instructs the model to include source URLs for claims about publicly advertised services.
+- **Structured blueprint generation:** Produces business objectives, requirements, proposed architecture, discovery questions, risks, implementation phases, and evaluation metrics.
+- **Human-in-the-loop safeguards:** Highlights assumptions, uncertainty, missing information, and situations requiring human review.
+- **Interactive Streamlit interface:** Lets users submit inquiries and inspect generated reports.
+- **Markdown export:** Downloads generated blueprints for further review and editing.
+- **Automated tests:** Tests basic source handling and blueprint workflow behavior.
+
+## Example Use Case
+
+An e-commerce company receives hundreds of customer enquiries every week and wants to reduce manual support workload.
+
+The copilot can help draft a proposed solution covering:
+
+- Classification of order tracking, returns, payment issues, product questions, and complaints.
+- Extraction of relevant order and customer details.
+- Suggested routing and priority assignment.
+- Human escalation for uncertain or sensitive cases.
+- Data protection, evaluation metrics, and implementation phases.
+
+This is a proposed architecture, not a claim that the system has been integrated with a live customer-support platform.
 
 ## How It Works
 
-1. **Data ingestion:** Collects publicly available content from Cynbit's services, contact, and careers pages.
-2. **Text chunking:** Splits the collected content into overlapping character-based chunks.
-3. **Retrieval:** Applies TF-IDF vectorization and cosine similarity to retrieve relevant passages for a client inquiry.
-4. **Prompt construction:** Combines the inquiry, retrieved evidence, source URLs, and output requirements.
-5. **LLM generation:** Uses Gemini 2.5 Flash through the OpenRouter API to generate the blueprint.
-6. **Presentation and export:** Displays the generated result in Streamlit and provides a Markdown download.
+1. **Data ingestion:** Collects publicly accessible content from Cynbit's services, contact, and careers pages.
+2. **Text chunking:** Splits collected text into overlapping character-based chunks.
+3. **Retrieval:** Uses TF-IDF vectorization and cosine similarity to rank relevant passages for a client inquiry.
+4. **Prompt construction:** Combines the inquiry, retrieved evidence, source URLs, and generation requirements.
+5. **LLM generation:** Calls Gemini 2.5 Flash through the OpenRouter API.
+6. **Presentation and export:** Displays the blueprint in Streamlit and provides a downloadable Markdown report.
 
 ## Architecture
 
@@ -47,7 +78,7 @@ Client Business Inquiry
    Blueprint Workflow
           |
           v
- TF-IDF Context Retrieval <---- Public Website Data
+   TF-IDF Retrieval <----- Public Cynbit Website Data
           |
           v
   Evidence-Aware Prompt
@@ -56,7 +87,7 @@ Client Business Inquiry
  Gemini 2.5 Flash via OpenRouter
           |
           v
- Structured Opportunity Blueprint
+ Structured AI Opportunity Blueprint
           |
           v
     Markdown Download
@@ -66,28 +97,15 @@ Client Business Inquiry
 
 | Component | Technology |
 |---|---|
-| Language | Python 3.11 |
-| User interface | Streamlit |
+| Programming language | Python 3.11 |
+| Frontend | Streamlit |
 | Retrieval | scikit-learn, TF-IDF, cosine similarity |
 | Language model | Gemini 2.5 Flash |
 | LLM API integration | OpenAI Python SDK with OpenRouter |
 | Configuration | python-dotenv |
 | Testing | pytest |
 | Version control | Git and GitHub |
-
-## Blueprint Output
-
-The generated report is structured around nine sections:
-
-1. Business objective
-2. Extracted requirements
-3. Relevant Cynbit services with supporting URLs
-4. Proposed architecture and rationale
-5. Missing questions
-6. Risks and safeguards
-7. Implementation phases
-8. Evaluation metrics
-9. Assumptions and limitations
+| Deployment | Streamlit Community Cloud |
 
 ## Project Structure
 
@@ -95,9 +113,9 @@ The generated report is structured around nine sections:
 cynbit-ai-opportunity-copilot/
 ├── app/
 │   ├── __init__.py
+│   ├── fetch_sources.py
 │   ├── llm_client.py
 │   ├── main.py
-│   ├── fetch_sources.py
 │   ├── retriever.py
 │   ├── ui.py
 │   └── workflows/
@@ -105,7 +123,8 @@ cynbit-ai-opportunity-copilot/
 │       └── blueprint.py
 ├── data/
 │   └── public_sources/
-│       └── cynbit_sources.json
+│       ├── cynbit_sources.json
+│       └── cynbit_sources.txt
 ├── tests/
 │   └── test_blueprint.py
 ├── .gitignore
@@ -113,13 +132,13 @@ cynbit-ai-opportunity-copilot/
 └── requirements.txt
 ```
 
-## Getting Started
+## Run Locally
 
 ### Prerequisites
 
 - Python 3.11
 - pip
-- An OpenRouter API key with access to the selected model
+- An OpenRouter API key with access to the configured model
 
 ### 1. Clone the repository
 
@@ -134,9 +153,9 @@ cd cynbit-ai-opportunity-copilot
 pip install -r requirements.txt
 ```
 
-Ensure `requirements.txt` includes all runtime dependencies, including the installed version of `scikit-learn`.
+Ensure `requirements.txt` includes all required runtime dependencies, including scikit-learn.
 
-### 3. Configure the API key
+### 3. Configure environment variables
 
 Create a `.env` file in the project root:
 
@@ -144,15 +163,15 @@ Create a `.env` file in the project root:
 OPENROUTER_API_KEY=your_openrouter_api_key
 ```
 
-Keep this file private. Never commit API keys or other secrets to GitHub.
+Never commit your API key or other secrets to GitHub.
 
-### 4. Run the application
+### 4. Launch the application
 
 ```bash
 python -m streamlit run app/ui.py
 ```
 
-### 5. Run automated tests
+### 5. Run the tests
 
 ```bash
 python -m pytest -v
@@ -163,35 +182,43 @@ python -m pytest -v
 The current test suite contains six tests covering:
 
 - Public source file availability and structure.
-- Presence of required source pages.
+- Presence of required website sources.
 - Basic blueprint output structure.
 - Source URL presence.
 - Human-review wording.
 
-The workflow tests use mocked model responses. Passing these tests demonstrates basic application behavior, but does not independently prove the factual accuracy of generated recommendations, citation entailment, retrieval quality, or production-grade guardrail effectiveness.
+Relevant workflow tests use mocked LLM responses. Passing these tests demonstrates basic application behavior but does not independently establish model factuality, citation entailment, retrieval quality, or production-grade guardrail effectiveness.
 
 ## Current Limitations
 
 - Retrieval uses lexical TF-IDF similarity rather than embedding-based semantic search.
 - No dedicated vector database is used.
-- Website extraction may retain some navigation or interface text.
-- Public website statements are not independent verification of internal company capabilities.
-- Model outputs may contain unsupported assumptions and require human review.
-- Integrations, costs, timelines, and performance must be validated before implementation.
-- This is a prototype, not a production deployment or a claim of measured business impact.
+- Website extraction may retain navigation or interface text.
+- Public website content does not independently verify internal company capabilities.
+- Generated recommendations may contain unsupported assumptions and require human review.
+- Proposed integrations, costs, timelines, and performance must be validated before implementation.
+- No production integrations or measured business impact are claimed.
 
 ## Public Information Sources
 
-The source collection is based on the following publicly accessible Cynbit pages:
+- [Cynbit Services](https://www.cynbit.in/services)
+- [Cynbit Contact](https://www.cynbit.in/contact)
+- [Cynbit Careers](https://www.cynbit.in/careers)
 
-- [Services](https://www.cynbit.in/services)
-- [Contact](https://www.cynbit.in/contact)
-- [Careers](https://www.cynbit.in/careers)
+These pages provide publicly available context for the prototype; they are not independent verification of internal company capabilities.
 
 ## Disclaimer
 
-This project is an independent assessment prototype exploring a potential AI-assisted business workflow. It is not an official Cynbit product and does not imply access to confidential company information, confirmation of internal capabilities, or endorsement by Cynbit.
+This is an independent assessment prototype exploring a potential AI-assisted business workflow. It is not an official Cynbit product and does not imply access to confidential company information or endorsement by Cynbit.
+
+## Author
+
+**Gourav Chhatwani**
+
+- GitHub: [GouravGC](https://github.com/GouravGC)
+- Portfolio: [Data Science & AI Portfolio](https://gcsportfolio.streamlit.app/)
+- Live Project: [Cynbit AI Opportunity Blueprint Copilot](https://cynbit-ai-opportunity-copilot.streamlit.app/)
 
 ---
 
-**Built by [Gourav Chhatwani](https://github.com/GouravGC)**
+If you find this project useful, feel free to explore the source code and try the live demo.
